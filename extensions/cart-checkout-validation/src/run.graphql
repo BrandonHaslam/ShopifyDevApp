@@ -1,0 +1,17 @@
+query RunInput {
+  cart {
+    lines {
+      id
+      quantity
+      merchandise {
+        ... on ProductVariant {
+          metafield(namespace: "custom", key: "limit") {
+            value
+          }
+          sku
+          title
+        }
+      }
+    }
+  }
+}
