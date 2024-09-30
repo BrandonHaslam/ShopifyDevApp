@@ -39,7 +39,7 @@ export function run(input) {
       }
     }
 
-    console.log(`Processing product "${title}" (SKU: ${sku}) with quantity ${quantity} and limit ${limit}`);
+    // console.log(`Processing product "${title}" (SKU: ${sku}) with quantity ${quantity} and limit ${limit}`);
 
     // Check if there's a custom limit set via the metafield and compare it to the quantity
     if (limit !== null && quantity > limit) {

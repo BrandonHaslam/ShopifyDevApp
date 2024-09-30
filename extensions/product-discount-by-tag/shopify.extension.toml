@@ -4,13 +4,16 @@ api_version = "2024-07"
 name = "t:name"
 handle = "product-discount-by-tag"
 type = "function"
-
 description = "t:description"
 
   [[extensions.targeting]]
   target = "purchase.product-discount.run"
   input_query = "src/run.graphql"
   export = "run"
+
+  [extensions.input.variables]
+  namespace = "$app:product-discount-by-tag"
+  key = "function-configuration"
 
   [extensions.build]
   command = ""

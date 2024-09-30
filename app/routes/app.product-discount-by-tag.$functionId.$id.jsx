@@ -59,7 +59,7 @@ export const action = async ({ params, request }) => {
 
   const metafields = [
     {
-      namespace: "$app:volume-discount",
+      namespace: "$app:product-discount-by-tag",
       key: "function-configuration",
       type: "json",
       value: JSON.stringify({

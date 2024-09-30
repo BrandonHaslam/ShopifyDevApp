@@ -59,12 +59,11 @@ export const action = async ({ params, request }) => {
 
   const metafields = [
     {
-      namespace: "$app:volume-discount",
+      namespace: "$app:product-discount-by-tag",
       key: "function-configuration",
       type: "json",
       value: JSON.stringify({
-        quantity: configuration.quantity,
-        percentage: configuration.percentage,
+        tags: [configuration.tag],
       }),
     },
   ];
@@ -189,8 +188,7 @@ export default function VolumeNew() {
       startDate: useField(todaysDate),
       endDate: useField(null),
       configuration: {
-        quantity: useField("1"),
-        percentage: useField("0"),
+        tag: useField("1"),
       },
     },
     onSubmit: async (form) => {
@@ -204,8 +202,7 @@ export default function VolumeNew() {
         startsAt: form.startDate,
         endsAt: form.endDate,
         configuration: {
-          quantity: parseInt(form.configuration.quantity),
-          percentage: parseFloat(form.configuration.percentage),
+          tag: form.configuration.tag,
         },
       };
 
@@ -262,15 +259,9 @@ export default function VolumeNew() {
                       Volume
                     </Text>
                     <TextField
-                      label="Minimum quantity"
+                      label="Discount Tag"
                       autoComplete="on"
-                      {...configuration.quantity}
-                    />
-                    <TextField
-                      label="Discount percentage"
-                      autoComplete="on"
-                      {...configuration.percentage}
-                      suffix="%"
+                      {...configuration.tag}
                     />
                   </BlockStack>
                 </Card>

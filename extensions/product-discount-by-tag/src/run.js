@@ -23,47 +23,54 @@ const EMPTY_DISCOUNT = {
 export function run(input) {
   /**
    * @type {{
-   *   quantity: number
-   *   percentage: number
+   *   tag: string
    * }}
    */
-  const configuration = JSON.parse(
-    input?.discountNode?.metafield?.value ?? "{}",
-  );
-  // if (!configuration.quantity || !configuration.percentage) {
-  //   return EMPTY_DISCOUNT;
-  // }
   
-  // if(!input?.cart?.buyerIdentity?.customer?.hasAnyTag){
-  //   return EMPTY_DISCOUNT;
-  // }
+  if(!input?.cart?.buyerIdentity?.customer?.hasAnyTag){
+    return EMPTY_DISCOUNT;
+  }
 
-  const targets = input.cart.lines
-    .map((line) => {
-      return /** @type {Target} */ ({
-        cartLine: {
-          id: line.id,
-        },
-      });
+  const discounts = input.cart.lines
+    .map((line, index) => {
+      if(index === 0){
+        return  {
+          targets: [
+            {
+              cartLine: {
+                id: line.id,
+              },
+            }
+          ],
+          value: {
+            percentage: {
+              value: "50.0"
+            }
+          }
+        }
+      }
+      return  {
+        targets: [
+          {
+            cartLine: {
+              id: line.id,
+            },
+          }
+        ],
+        value: {
+          percentage: {
+            value: "50.0"
+          }
+        }
+      }
     });
-
-  if (!targets.length) {
+  if (!discounts.length) {
     console.error("No cart lines qualify for volume discount.");
     return EMPTY_DISCOUNT;
   }
 
   return {
-    discounts: [
-      {
-        targets,
-        value: {
-          percentage: {
-            value: '10'
-            // value: configuration.percentage.toString(),
-          },
-        },
-      },
-    ],
+    discounts,
     discountApplicationStrategy: DiscountApplicationStrategy.First,
   };
 }

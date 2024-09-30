@@ -1,13 +1,20 @@
-query RunInput {
+query RunInput($tags: [String!]!) {
   cart {
     buyerIdentity {
       customer {
-        hasAnyTag(tags: ["BFCM"])
+        hasAnyTag(tags: $tags)
       }
     }
     lines {
       id
       quantity
+      merchandise {
+        ... on ProductVariant {
+          metafield(namespace: "custom", key: "discount_value") {
+            value
+          }
+        }
+      }
     }
   }
   discountNode {
