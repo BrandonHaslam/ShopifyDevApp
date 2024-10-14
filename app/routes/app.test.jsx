@@ -7,13 +7,28 @@ import {
   Page,
   Text,
   BlockStack,
+  Button,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
+import { useState } from "react";
 
 export default function AdditionalPage() {
+  const [apiResponse, setApiResponse] = useState(null);
+
+  // Function to trigger the fetch request to /api/hello
+  const handleFetch = async () => {
+    try {
+      const response = await fetch("../api/hello");
+      const data = await response.json();
+      setApiResponse(data); // Update the state with the fetched response
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
+
   return (
     <Page>
-      <TitleBar title="Additional page Tex=st" />
+      <TitleBar title="Additional Page Text" />
       <Layout>
         <Layout.Section>
           <Card>
@@ -37,6 +52,16 @@ export default function AdditionalPage() {
                 link to it in the <Code>&lt;NavMenu&gt;</Code> component found
                 in <Code>app/routes/app.jsx</Code>.
               </Text>
+
+              {/* Button to trigger API Fetch */}
+              <Button onClick={handleFetch}>Trigger API Fetch</Button>
+
+              {/* Display API Response if available */}
+              {apiResponse && (
+                <Text as="p" variant="bodyMd">
+                  API Response: {apiResponse.message}
+                </Text>
+              )}
             </BlockStack>
           </Card>
         </Layout.Section>

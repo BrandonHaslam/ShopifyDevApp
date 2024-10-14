@@ -32,9 +32,10 @@ export function run(input) {
   }
 
   const discounts = input.cart.lines
+    .filter(line => line.merchandise?.product?.metafield?.value)
     .map((line, index) => {
-      if(index === 0){
         return  {
+          message: "Black Friday Discount Applied",
           targets: [
             {
               cartLine: {
@@ -44,25 +45,11 @@ export function run(input) {
           ],
           value: {
             percentage: {
-              value: "50.0"
+              value: parseFloat(line.merchandise.product.metafield.value)
             }
           }
         }
-      }
-      return  {
-        targets: [
-          {
-            cartLine: {
-              id: line.id,
-            },
-          }
-        ],
-        value: {
-          percentage: {
-            value: "50.0"
-          }
-        }
-      }
+
     });
   if (!discounts.length) {
     console.error("No cart lines qualify for volume discount.");
@@ -71,6 +58,6 @@ export function run(input) {
 
   return {
     discounts,
-    discountApplicationStrategy: DiscountApplicationStrategy.First,
+    discountApplicationStrategy: DiscountApplicationStrategy.All,
   };
 }

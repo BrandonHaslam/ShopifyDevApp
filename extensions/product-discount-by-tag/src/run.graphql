@@ -10,8 +10,10 @@ query RunInput($tags: [String!]!) {
       quantity
       merchandise {
         ... on ProductVariant {
-          metafield(namespace: "custom", key: "discount_value") {
-            value
+          product {
+            metafield(namespace: "custom", key: "discount_value") {
+              value
+            }
           }
         }
       }

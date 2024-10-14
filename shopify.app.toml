@@ -3,7 +3,7 @@
 client_id = "3b8db01d35d99eb3f72089171a00daa8"
 name = "brandon-dev-app"
 handle = "brandon-dev-app"
-application_url = "https://knowledgestorm-playing-digital-cbs.trycloudflare.com"
+application_url = "https://defined-larry-dispatch-corresponding.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "read_products,write_discounts,write_discounts_allocator_functions,writ
 
 [auth]
 redirect_urls = [
-  "https://knowledgestorm-playing-digital-cbs.trycloudflare.com/auth/callback",
-  "https://knowledgestorm-playing-digital-cbs.trycloudflare.com/auth/shopify/callback",
-  "https://knowledgestorm-playing-digital-cbs.trycloudflare.com/api/auth/callback"
+  "https://defined-larry-dispatch-corresponding.trycloudflare.com/auth/callback",
+  "https://defined-larry-dispatch-corresponding.trycloudflare.com/auth/shopify/callback",
+  "https://defined-larry-dispatch-corresponding.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
